@@ -1,7 +1,6 @@
 'use client'
 
 import PlaygroundContextProvider from "@/app/contexts/playground"
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 
 import { type Problem } from '../../types'
@@ -17,19 +16,15 @@ const HeaderSection = () => {
 }
 
 const PlaygroundPage = ({ problem }: { problem: Problem }) => {
-  const queryClient = new QueryClient()
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <PlaygroundContextProvider problem={problem}>
-        <div className='flex flex-col md:h-[100vh]'>
-          <HeaderSection />
-          <div className='flex-grow min-h-0 bg-leetcode-background'>
-            <PanelModel />
-          </div>
+    <PlaygroundContextProvider problem={problem}>
+      <div className='flex flex-col md:h-[100vh]'>
+        <HeaderSection />
+        <div className='flex-grow min-h-0 bg-leetcode-background'>
+          <PanelModel />
         </div>
-      </PlaygroundContextProvider>
-    </QueryClientProvider>
+      </div>
+    </PlaygroundContextProvider>
   )
 }
 
