@@ -12,7 +12,7 @@ export default ({ className }: {className ?: string}) => {
             onValueChange={(value)=>{ dispatch({ type: 'secondSectionTabChange', payload: value}) }} 
             className={className}
         >
-    <TabsList className="justify-start w-max bg-transparent text-white">
+    <TabsList className="justify-start w-max">
       {secondSectionTabs.map((tab)=>(
         <TabsTrigger key={tab.type} value={tab.type}>{tab.title}</TabsTrigger>
       ))}

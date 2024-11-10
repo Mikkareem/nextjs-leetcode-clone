@@ -5,7 +5,7 @@ import LanguageSelector from "./LanguageSelector";
 
 export default () => (
   <div className="h-[100%] flex flex-col gap-2">
-    <div className='flex justify-between text-white'>
+    <div className='flex justify-between'>
         <LanguageSelector className='self-start'/>
         <CodeButtons />
     </div>

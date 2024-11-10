@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { exampleProblems } from "./temp";
+import {ProblemListItem} from "@/app/types";
 
 export async function GET(request: NextRequest) {
   await new Promise(res => setTimeout(res, 4000))
@@ -15,8 +15,13 @@ export async function GET(request: NextRequest) {
   const startIndex = (currentPage-1) * perPage
   const endIndex = startIndex + perPage
 
+  const response = await fetch("http://localhost:8080/problems", { cache: "no-cache" })
+  const data = (await response.json()) as {
+    problems: ProblemListItem[]
+  }
+
   return NextResponse.json({ 
-    problems: exampleProblems.slice(startIndex, endIndex),
-    totalPages: (exampleProblems.length % perPage === 0) ? Math.floor(exampleProblems.length / perPage) : Math.floor(exampleProblems.length / perPage) + 1
+    problems: data.problems.slice(startIndex, endIndex),
+    totalPages: (data.problems.length % perPage === 0) ? Math.floor(data.problems.length / perPage) : Math.floor(data.problems.length / perPage) + 1
   })
 }

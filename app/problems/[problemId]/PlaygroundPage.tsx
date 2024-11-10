@@ -9,7 +9,7 @@ const PanelModel = dynamic(() => import('./components/PanelModel'), { ssr: false
 
 const HeaderSection = () => {
   return (
-    <div className="h-12 min-h-12 bg-leetcode-secondary">
+    <div className="h-12 min-h-12">
       Header
     </div>
   )
@@ -18,9 +18,9 @@ const HeaderSection = () => {
 const PlaygroundPage = ({ problem }: { problem: Problem }) => {
   return (
     <PlaygroundContextProvider problem={problem}>
-      <div className='flex flex-col md:h-[100vh]'>
+      <div className='flex flex-col h-full'>
         <HeaderSection />
-        <div className='flex-grow min-h-0 bg-leetcode-background'>
+        <div className='flex-grow min-h-0'>
           <PanelModel />
         </div>
       </div>

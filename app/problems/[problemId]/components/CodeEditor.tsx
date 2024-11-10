@@ -2,7 +2,7 @@
 
 import { StreamLanguage } from '@codemirror/language'
 import ReactCodeMirror from '@uiw/react-codemirror'
-import { vscodeDark, vscodeLight } from '@uiw/codemirror-theme-vscode'
+import { vscodeDark } from '@uiw/codemirror-theme-vscode'
 import { java, c, cpp } from '@codemirror/legacy-modes/mode/clike'
 import { javascript } from '@codemirror/legacy-modes/mode/javascript'
 import { python } from '@codemirror/legacy-modes/mode/python'

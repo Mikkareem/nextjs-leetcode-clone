@@ -9,7 +9,7 @@ export default ({ className }: { className ?: string }) => {
   const { state: { selectedFirstSectionTab, firstSectionTabs }, dispatch } = usePlaygroundContext()
 
   return <Tabs value={selectedFirstSectionTab.type} onValueChange={(value)=>{ dispatch({ type: 'firstSectionTabChange', payload: value }) }} className={className}>
-    <TabsList className="justify-start w-max bg-transparent text-white">
+    <TabsList className="justify-start w-max">
       {firstSectionTabs.map((tab)=>(
         <TabsTrigger key={tab.type} value={tab.type}>{tab.title}</TabsTrigger>
       ))}

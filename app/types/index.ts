@@ -1,29 +1,46 @@
 import { Dispatch } from "react"
 
+export type CodeRequest = {
+  problemId: string,
+  userCode: string,
+  language: string,
+  sampleTestcases: Testcase[]
+}
+
 export type TestcaseResult = {
   testcase: Testcase,
-  output?: string,
-  expectedOutput?: string,
+  yourResult?: string,
+  expectedResult?: string,
   stdout?: string,
   result: 'Accepted' | 'Wrong Answer' | 'Runtime Error' | 'Compilation Error' | 'Time Limit Exceeded'
 }
 
 export type Testcase = {
-  testcaseNo: number,
+  id: number,
   inputs: {
-      name: string,
+      details: TestcaseInputFormat,
       value: string
-  }[]
+  }[],
+  isHidden: boolean
 }
 
-type Difficulty = 'Easy' | 'Medium' | 'Hard'
+export type Difficulty = 'Easy' | 'Medium' | 'Hard'
 
 export type Problem = {
   problemNo: number,
   title: string,
   description: string,
   difficulty: Difficulty,
+  preferredSnippet?: string,
+  preferredLanguage?: string,
   sampleTestcases: Testcase[]
+}
+
+export type ProblemListItem = {
+  problemNo: number,
+  problemName: string,
+  problemDifficulty: Difficulty,
+  isSolved: boolean,
 }
 
 type FirstSectionTabType = 'description' | 'submissions' | 'submission' | 'solution'
@@ -33,7 +50,7 @@ type ThirdSectionTabType = 'testcases' | 'testResults'
 type Tab<T> = {
   type: T,
   title: string,
-  isCloseable: Boolean
+  isCloseable: boolean
 }
 
 export type PlaygroundState = {
@@ -58,4 +75,46 @@ export type PlaygroundAction = {
 export type PlaygroundContextType = {
   state: PlaygroundState,
   dispatch: Dispatch<PlaygroundAction>
+}
+
+export type TestcaseCollectionType = 'SINGLE' | 'LIST' | 'LIST_LIST'
+export type TestcaseType = 'STRING' | 'NON_STRING'
+
+export type TestcaseInputFormat = {
+  name: string,
+  collectionType: TestcaseCollectionType,
+  type: TestcaseType,
+  displayOrder: number
+}
+
+export type TestcaseFormat = {
+  id: number,
+  formats: TestcaseInputFormat[],
+}
+
+export type ProblemCrudItem = {
+  id: number,
+  title: string,
+  description: string,
+  difficulty: Difficulty,
+  snippets: {
+    c: string,
+    cpp: string,
+    java: string,
+    python: string,
+    javascript: string,
+  },
+  fileContent: {
+    c: string,
+    creplaceStr: string,
+    cpp: string,
+    cppReplaceStr: string,
+    java: string,
+    javaReplaceStr: string,
+    python: string,
+    pythonReplaceStr: string,
+    javascript: string,
+    javascriptReplaceStr: string
+  },
+  testcaseFormats: TestcaseInputFormat[]
 }

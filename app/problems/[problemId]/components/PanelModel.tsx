@@ -2,20 +2,19 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/componen
 import FirstSectionTabs from "./FirstSectionTabs"
 import SecondSectionTabs from "./SecondSectionTabs"
 import ThirdSectionTabs from "./ThirdSectionTabs"
-import { useState } from "react"
 
 const NewModelPanels = () => (
   <ResizablePanelGroup direction='horizontal'>
     <ResizablePanel defaultSize={33} className='p-2'>
-      <FirstSectionTabs className="w-full h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
+      <FirstSectionTabs className="w-full h-full flex flex-col rounded-xl bg-card border p-2"/>
     </ResizablePanel>
     <ResizableHandle className="bg-transparent"/>
     <ResizablePanel defaultSize={33} minSize={33} className='p-2'>
-      <SecondSectionTabs className="h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
+      <SecondSectionTabs className="h-full flex flex-col rounded-xl bg-card border p-2"/>
     </ResizablePanel>
     <ResizableHandle className="bg-transparent"/>
     <ResizablePanel defaultSize={33} className='p-2'>
-      <ThirdSectionTabs className="w-full h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
+      <ThirdSectionTabs className="w-full h-full flex flex-col bg-card border rounded-xl p-2"/>
     </ResizablePanel>
   </ResizablePanelGroup>
 )
@@ -23,17 +22,17 @@ const NewModelPanels = () => (
 const OldModelPanels = () => (
   <ResizablePanelGroup direction='horizontal'>
     <ResizablePanel defaultSize={50} className='p-2'>
-      <FirstSectionTabs className="w-full h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
+      <FirstSectionTabs className="w-full h-full flex flex-col rounded-xl p-2"/>
     </ResizablePanel>
     <ResizableHandle className="bg-transparent"/>
     <ResizablePanel defaultSize={50}>
       <ResizablePanelGroup direction='vertical'>
         <ResizablePanel defaultSize={50} minSize={50} className='p-2'>
-          <SecondSectionTabs className="h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
+          <SecondSectionTabs className="h-full flex flex-col rounded-xl p-2"/>
         </ResizablePanel>
         <ResizableHandle className="bg-transparent"/>
         <ResizablePanel defaultSize={50} className='p-2'>
-          <ThirdSectionTabs className="w-full h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
+          <ThirdSectionTabs className="w-full h-full flex flex-col rounded-xl p-2"/>
         </ResizablePanel>
       </ResizablePanelGroup>
     </ResizablePanel>
@@ -42,9 +41,9 @@ const OldModelPanels = () => (
 
 const MobilePanels = () => (
   <>
-    <FirstSectionTabs className="w-full md:h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
-    <SecondSectionTabs className="h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
-    <ThirdSectionTabs className="w-full h-full flex flex-col bg-leetcode-primary rounded-xl p-2"/>
+    <FirstSectionTabs className="w-full md:h-full flex flex-col rounded-xl p-2"/>
+    <SecondSectionTabs className="h-full flex flex-col rounded-xl p-2"/>
+    <ThirdSectionTabs className="w-full h-full flex flex-col rounded-xl p-2"/>
   </>
 )
 

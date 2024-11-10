@@ -3,8 +3,9 @@
 import { usePlaygroundContext } from "@/app/contexts/playground"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
-import { type Testcase } from '../../../types'
+import { type Testcase } from '@/app/types'
 
+// eslint-disable-next-line import/no-anonymous-default-export,react/display-name
 export default () => {
   const [selectedTestcase, setSelectedTestcase] = useState(0)
   const { state: { problem } } = usePlaygroundContext();
@@ -15,21 +16,29 @@ export default () => {
 
   const testcases = problem.sampleTestcases
 
-
   return (
     <div className="h-full overflow-y-auto">
-      <div className="flex gap-6 flex-wrap">
-        {testcases.map((testcase, index) => (
+      <div className="flex gap-6 flex-wrap py-4">
+        {testcases.map((_, index) => (
           <div 
-            key={testcase.testcaseNo} 
+            key={index}
             onClick={() => setSelectedTestcase(index)} 
-            className={`bg-leetcode-variance text-white px-4 py-2 rounded-xl text-sm cursor-pointer`}
+            className={
+              `px-4 py-2 rounded-md text-sm cursor-pointer bg-secondary text-secondary-foreground ${index == selectedTestcase && 'border-2 border-primary'}`
+            }
           >
-            Case {testcase.testcaseNo}
+            Case {index+1}
           </div>
         ))}
       </div>
-      <Testcase testcase={testcases[selectedTestcase]}/>
+        {testcases.length > 0
+            ? (<Testcase testcase={testcases[selectedTestcase]}/>)
+            : (
+                <div className='w-full h-full flex justify-center items-center'>
+                    <p>No testcases found</p>
+                </div>
+            )
+        }
     </div>
   )
 }
@@ -39,9 +48,9 @@ const Testcase = ({ testcase }: { testcase: Testcase }) => {
     <div>
       <h4 className="text-xl font-semibold">Inputs</h4>
       {testcase.inputs.map((input) => (
-        <div key={input.name}>
-          <Label>{input.name}=</Label>
-          <div className="bg-slate-900 text-white rounded-lg px-4 py-2">
+        <div key={input.details.name}>
+          <Label>{input.details.name}=</Label>
+          <div className="rounded-lg px-4 py-2 bg-secondary text-secondary-foreground">
             <p>{input.value}</p>
           </div>
         </div>

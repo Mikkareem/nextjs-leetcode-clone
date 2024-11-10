@@ -14,7 +14,7 @@ const LanguageSelector = ({ className }: LanguageSelectorProps) => {
         <SelectTrigger className='outline-none border-none'>
             <SelectValue placeholder='Select Language' />
         </SelectTrigger>
-        <SelectContent className='bg-leetcode-secondary text-white'>
+        <SelectContent>
             <SelectItem value='C'>C</SelectItem>
             <SelectItem value='Cpp'>Cpp</SelectItem>
             <SelectItem value='Java'>Java</SelectItem>

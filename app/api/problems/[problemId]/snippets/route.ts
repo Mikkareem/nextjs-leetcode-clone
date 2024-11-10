@@ -1,19 +1,15 @@
 import { NextRequest, NextResponse } from "next/server"
 
-export async function GET(request: NextRequest) {
+export async function GET(
+    request: NextRequest,
+    {params}: { params: { problemId: number } }
+) {
   const language = request.nextUrl.searchParams.get("language")
-  let snippet = 'NOT A SUPPORTED LANGUAGE';
 
-  if(language == 'C') {
-    snippet = 'int main() {\n\t printf("hello world\\n"); \n}'
-  } else if(language == 'Cpp') {
-    snippet = 'int main() {\n\t printf("hello world\\n"); \n}'
-  } else if(language === 'Java') {
-    snippet = 'class Solution {\n\tpublic static void main(String[] args) {\n\t\t System.out.println("Hello World\\n"); \n\t}\n}'
-  } else if(language === 'Python') {
-    snippet = 'python'
-  } else if(language === 'Javascript') {
-    snippet = 'javascript'
-  }
-  return NextResponse.json({ snippet })
+  const response = await fetch(
+      `http://localhost:8080/problem/${params.problemId}/snippets?language=${language}`,
+      { cache: "no-cache" }
+  )
+
+  return NextResponse.json(await response.json())
 }
