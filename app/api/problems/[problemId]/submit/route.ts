@@ -1,9 +1,25 @@
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
+import {CodeRequest} from "@/app/types";
 
-let submissionId = 0;
+export async function POST(
+    request: NextRequest,
+    { params }: { params: { problemId: string } }
+) {
 
-export async function POST() {
-  await new Promise(res => setTimeout(res, 3000))
-  submissionId++
-  return NextResponse.json({ submissionId })
+  const body: CodeRequest = await request.json();
+
+  const response = await fetch(
+      `http://localhost:8080/problem/${params.problemId}/submit`,
+      {
+        cache: "no-cache",
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+  )
+
+  const data = await response.json()
+  return NextResponse.json(data)
 }

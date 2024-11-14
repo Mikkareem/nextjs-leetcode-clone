@@ -5,6 +5,7 @@ import "./globals.css";
 import ThemeProvider from '@/components/ThemeProvider'
 import Provider from '@/components/QueryProvider'
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const ThemeToggle = dynamic(() => import('@/components/ThemeToggle'), { ssr: false })
 
@@ -42,9 +43,13 @@ export default function RootLayout({
       >
         <Provider>
           <div className='flex flex-col w-full h-[100vh]'>
-              <div className='w-full h-[60px] flex'>
-                  <div className='justify-self-end'>
-                      <ThemeToggle/>
+              <div className='w-full min-h-[60px] flex'>
+                  <div className='w-full bg-secondary flex justify-between items-center px-4'>
+                      <Image src={'/Lotcode-Logo.png'} alt={'Logo'} width={50} height={50} />
+                      <div className='flex items-center gap-6'>
+                          <ThemeToggle/>
+                          <div className='w-[36px] h-[36px] rounded-full bg-primary'></div>
+                      </div>
                   </div>
               </div>
               <div className='flex-grow min-h-0'>

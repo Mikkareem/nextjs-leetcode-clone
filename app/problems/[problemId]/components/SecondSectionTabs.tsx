@@ -4,6 +4,7 @@ import { usePlaygroundContext } from "@/app/contexts/playground"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import CodeSection from "./CodeSection"
 
+// eslint-disable-next-line react/display-name,import/no-anonymous-default-export
 export default ({ className }: {className ?: string}) => {
   const { state: { selectedSecondSectionTab, secondSectionTabs }, dispatch } = usePlaygroundContext()
 

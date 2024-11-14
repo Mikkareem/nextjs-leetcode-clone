@@ -9,8 +9,8 @@ const PanelModel = dynamic(() => import('./components/PanelModel'), { ssr: false
 
 const HeaderSection = () => {
   return (
-    <div className="h-12 min-h-12">
-      Header
+    <div className="min-h-12 flex justify-center items-center">
+      <p>Hi user, More features will be added in future here. Stay Tuned</p>
     </div>
   )
 }

@@ -18,7 +18,13 @@ type TipTapEditorProps = {
 
 const TipTapEditor = ({ content, onContentChange, placeholder }: TipTapEditorProps ) => {
     const extensions = [
-        StarterKit, 
+        StarterKit.configure({
+            code: {
+                HTMLAttributes: {
+                    class: 'bg-secondary text-secondary-foreground px-1 rounded',
+                }
+            }
+        }),
         Heading,
         Pre.configure({
             HTMLAttributes: {

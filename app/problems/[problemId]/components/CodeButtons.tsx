@@ -25,10 +25,21 @@ const runCode = async (code: string, language: string, problemId: string, testca
   return await response.json()
 }
 
-const submitCode = async (code: string) => {
+const submitCode = async (code: string, language: string, problemId: string, testcases: Testcase[]) => {
+  const body: CodeRequest = {
+    problemId,
+    language,
+    sampleTestcases: testcases,
+    userCode: code
+  }
   const response = await fetch(
-    "http://localhost:3000/api/problems",
-    { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: code }
+    `http://localhost:3000/api/problems/${problemId}/submit`,
+    {
+      cache: 'no-cache',
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }
   )
   return await response.json()
 }
@@ -51,7 +62,7 @@ export default () => {
     mutationKey: ['submit-code'],
     mutationFn: (code: string) => {
       dispatch({ type: 'submitCode' })
-      return submitCode(code)
+      return submitCode(code, language, problem.problemNo+"", problem.sampleTestcases)
     }
   })
 

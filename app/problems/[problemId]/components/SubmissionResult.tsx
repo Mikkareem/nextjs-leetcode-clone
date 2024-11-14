@@ -1,22 +1,17 @@
-import { useQuery, useMutationState } from "@tanstack/react-query"
+import {useMutationState, useQuery} from "@tanstack/react-query"
+import {AcceptedSubmission, NonAcceptedSubmission} from "@/app/types";
+import SuccessSubmission from "@/app/problems/[problemId]/components/SuccessSubmission";
+import FailureSubmission from "@/app/problems/[problemId]/components/FailureSubmission";
 
-const SuccessSubmission = () => {
-  return <div>Success Submission</div>
-}
-
-const FailureSubmission = () => {
-  return <div>Failure Submission</div>
-}
-
-const getSubmission = async (submissionId: number) => {
-  const response = await fetch(`http://localhost:3000/api/problems/submissions/${submissionId}`)
+const getSubmission = async (submissionId: number, problemId: number) => {
+  const response = await fetch(`http://localhost:3000/api/problems/${problemId}/submissions/${submissionId}`, { cache: 'no-cache' })
   return await response.json()
 }
 
-const Submission = ({ id }: { id: number }) => {
+const Submission = ({ id, problemId }: { id: number, problemId: number }) => {
   const { data, isFetching } = useQuery({
-    queryKey: ['get-submission'],
-    queryFn: () => getSubmission(id)
+    queryKey: ['get-submission', id, problemId],
+    queryFn: () => getSubmission(id, problemId)
   })
 
   if(isFetching) {
@@ -24,10 +19,11 @@ const Submission = ({ id }: { id: number }) => {
   }
 
   return (
-    <>{data.isSuccess ? <SuccessSubmission /> : <FailureSubmission />}</>
+    <>{data.verdict == 'Accepted' ? <SuccessSubmission submission={data as AcceptedSubmission}/> : <FailureSubmission submission={data as NonAcceptedSubmission}/>}</>
   )
 }
 
+// eslint-disable-next-line react/display-name,import/no-anonymous-default-export
 export default () => {
 
   const submitMutations = useMutationState({
@@ -44,9 +40,11 @@ export default () => {
     return <div>Submitting the code.....</div>
   }
 
-  const submissionId = (submitMutations[submitMutations.length - 1].data as { submissionId: number }).submissionId
+  console.log(submitMutations[submitMutations.length - 1].data)
+
+  const submission = (submitMutations[submitMutations.length - 1].data as { submissionId: number, problemId: number })
 
   return (
-    <Submission id={submissionId} />
+    <Submission id={submission.submissionId} problemId={submission.problemId}/>
   )
 }

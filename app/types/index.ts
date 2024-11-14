@@ -118,3 +118,36 @@ export type ProblemCrudItem = {
   },
   testcaseFormats: TestcaseInputFormat[]
 }
+
+export type AcceptedSubmission = {
+  submissionId: number,
+  problemId: number,
+  userId: string,
+  submittedCode: string,
+  codeLanguage: string,
+  submissionTime: string,
+  executionTime: string,
+  memoryConsumption: number,
+  verdict: string,
+}
+
+export type NonAcceptedSubmission = {
+  submissionId: number,
+  problemId: number,
+  userId: string,
+  submittedCode: string,
+  codeLanguage: string,
+  submissionTime: string,
+  verdict: string,
+  totalTestcasesCount: number,
+  executedTestcasesCount: number,
+  failedTestcase: {
+    expectedOutput: string,
+    yourOutput: string,
+    stdout: string,
+    inputs: {
+      name: string,
+      input: string
+    }[]
+  }
+}
