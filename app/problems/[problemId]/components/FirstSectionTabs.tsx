@@ -4,7 +4,10 @@ import { usePlaygroundContext } from "@/app/contexts/playground"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import CodeDescription from "./CodeDescription"
 import SubmissionResult from "./SubmissionResult"
+import Submissions from "@/app/problems/[problemId]/components/Submissions";
+import Solution from "@/app/problems/[problemId]/components/Solution";
 
+// eslint-disable-next-line import/no-anonymous-default-export,react/display-name
 export default ({ className }: { className ?: string }) => {
   const { state: { selectedFirstSectionTab, firstSectionTabs }, dispatch } = usePlaygroundContext()
 
@@ -23,11 +26,11 @@ export default ({ className }: { className ?: string }) => {
                 case 'description':
                   return <CodeDescription />
                 case 'submissions':
-                  return <div>Submissions</div>
+                  return <Submissions />
                 case 'submission':
                   return <SubmissionResult />
                 case 'solution':
-                  return <div>Solution</div>
+                  return <Solution />
               }
             })()
           }
