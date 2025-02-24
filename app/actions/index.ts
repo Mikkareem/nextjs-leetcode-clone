@@ -1,6 +1,7 @@
 "use server"
 
 import {Difficulty, ProblemCrudItem, TestcaseCollectionType, TestcaseInputFormat, TestcaseType} from "@/app/types";
+import {redirect} from "next/navigation";
 
 export const handleProblemSubmit = async (formData: FormData, isEditMode: boolean, pid: number|undefined) => {
     const count = parseInt(formData.get('inputCount') as string)
@@ -108,4 +109,31 @@ export const handleTestcaseDelete = async (pid: number, tid: string) => {
             cache: 'no-cache'
         }
     )
+}
+
+export const handleLogin = async (formData: FormData) => {
+    const loginRequestBody = {
+        username: formData.get('username') as string,
+        password: formData.get('password') as string
+    }
+
+    const response = await fetch(
+        `http://localhost:8080/auth/login`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginRequestBody),
+            cache: 'no-cache'
+        }
+    )
+
+    const data = await response.json()
+
+    if(data.status === "SUCCESS") {
+        redirect("/dashboard")
+    } else {
+
+    }
 }
